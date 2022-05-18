@@ -15,6 +15,7 @@ Backend API for managing student systems such as in schools/universities.
 - Spring Data JPA
 - PostgreSQL
 - Lombok
+- Thymeleaf templates
 
 ## Dependencies
 You can find all dependencies in `pom.xml` file

@@ -3,6 +3,7 @@ package com.mostafaeldahshan.studentmanagementsystem.service;
 import com.mostafaeldahshan.studentmanagementsystem.model.Student;
 import com.mostafaeldahshan.studentmanagementsystem.repo.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -53,9 +54,9 @@ public class StudentService {
     public void updateStudentInfo(Long studentId, String name, String email)
     {
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("not found"));
-        if(name != null && name.length() > 0 && !Objects.equals(student.getName(), name))
+        if(name != null && name.length() > 0 && !Objects.equals(student.getFirstName(), name))
         {
-            student.setName(name);
+            student.setFirstName(name);
         }
         if(email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email))
         {

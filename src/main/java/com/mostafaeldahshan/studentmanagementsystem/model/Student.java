@@ -1,14 +1,20 @@
 package com.mostafaeldahshan.studentmanagementsystem.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
 //Entity and table annotations for later on queries
-@Entity(name = "Student")
-@Table(name = "Student", uniqueConstraints = {
+@Entity(name = "student")
+@Table(name = "student", uniqueConstraints = {
         @UniqueConstraint(name = "student_mail_unique", columnNames = "email")
 })
+@Setter
+@Getter
+@NoArgsConstructor
+@ToString
 public class Student {
     //annotation of Id and SquenceGenerator for automated id generation and primary key of db
     @Id
@@ -16,81 +22,45 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_id")
     @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
-    private String name;
+
+    @Column(name = "firstName", nullable = false, columnDefinition = "TEXT")
+    private String firstName;
+
+    @Column(name = "lastName", nullable = false, columnDefinition = "TEXT")
+    private String lastName;
+
     @Column(name = "email", nullable = false, columnDefinition = "TEXT")
     private String email;
+
+    @Column(name = "gender", nullable = false, columnDefinition = "TEXT")
+    private String gender;
+
+    @Column(name = "course")
+    private String course;
+
+    @Column(name = "password", nullable = false, columnDefinition = "TEXT")
+    private String password;
+
+    @Column(name = "mobileNumber", nullable = false, columnDefinition = "TEXT")
+    private String mobileNumber;
+
     //having var age transient so it can be automatically calculated not hardcoded
-    @Transient
+    //@Transient
     @Column(name = "age")
     private int age;
-    private LocalDate dob;
 
-    public Student() {
-    }
+    @Column(name = "DOB", nullable = false, columnDefinition = "TEXT")
+    private String dob;
 
-    public Student(Long id, String name, String email, LocalDate dob) {
-        this.id = id;
-        this.name = name;
+    public Student(String firstName, String lastName, String email, String gender, String course, String password, String mobileNumber, int age, String dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.dob = dob;
-    }
-
-    public Student(String name, String email, LocalDate dob) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    //automation of age
-    public int getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears();
-    }
-
-    public void setAge(int age) {
+        this.gender = gender;
+        this.course = course;
+        this.password = password;
+        this.mobileNumber = mobileNumber;
         this.age = age;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", dob=" + dob +
-                '}';
     }
 }
